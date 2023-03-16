@@ -1,0 +1,52 @@
+mariaDb command prompt
+명령어로 데이터베이스 실행하기
+
+- mysql -u root -p
+- password 입력 : 1234
+- 명령어 끝나고 ';' 빼먹지 말기
+- show databases; -저장되어있는 db출력
+- use shopdb; - shopdb 데이터베이스 사용하겠다고 명렁
+- show tables; - shopdb에 저장된 테이블들 출력
+- desc membertbl; - desc(describe) table : 테이블 구조 확인 
+- select * from membertbl; - membertbl 테이블을 출력
+
+HeidiSQL은 서버 연결, 서버 호스트, 서버 데이터베이스, 쿼리 창 등의 다양한 기능을 제공
+리눅스, 윈도우 등의 외부의 MariaDB에 접속해서 사용가능
+
+SELECT문의 기본구조 
+=> SELECT 열이름 FROM 테이블이름 WHERE 조건
+
+SELECT는 한마디로 데이터베이스 내의 테이블에서 원하는 정보를 추출하는 명령어
+가장 많이 사용하는 구조
+
+SELECT 열이름
+	from 테이블 이름
+	where 조건
+	group by 그룹
+	having 집계함수를 이용한 조건
+	order by 순서
+
+use 데이터베이스_이름 -- 데이터베이스 선택
+select * from 데이터베이스이름.테이블이름; (태이블의 원래 이름은 데이터베이스.테이블이름임 
+하지만 데이터베이스가 선택된 상황에서는 데이터베이스이름을 생략해도 무방)
+*는 일반적으로 모든 것을 뜻함 
+
+
+별칭
+열 이름을 별도의 별칭으로 지정. AS 별칭을 붙이면 됨(생략 가능) 별칭 중간의 공백 있을시 ('') 홀따옴표로 감싸야함
+ex.. select first_name as 이름, gender 성별, hire_date '회사 입사일'
+
+
+where 절
+- 조회하는 결과에 특정한 조건을 줘서 원하는 데이터만 보고 싶을 때 사용
+- ex.. select * from userTbl where name = '김경호'; 
+- 조건연산자(>, <, = 등)와 관계 연산자(not, and, or등) 사용 가능
+- 연속적인 값에 between ... and 사용 가능 키나 몸무게 나이 등
+- 비연속적인 값에는 in 사용
+- 문자열의 내용 검색 like 연산자 사용 
+- ex.. where name like '김%';  -- 앞글자가 김이고 뒷 글자는 상관 없이 허용
+- '_' 연산자는 한 글자 매치
+- ex.. where name like '_용';  -- 앞글자가 한글자이고 마지막 글자가 용인
+
+
+
