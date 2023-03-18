@@ -1,6 +1,5 @@
 mariaDb command prompt
 명령어로 데이터베이스 실행하기
-
 - mysql -u root -p
 - password 입력 : 1234
 - 명령어 끝나고 ';' 빼먹지 말기
@@ -10,8 +9,10 @@ mariaDb command prompt
 - desc membertbl; - desc(describe) table : 테이블 구조 확인 
 - select * from membertbl; - membertbl 테이블을 출력
 
+
 HeidiSQL은 서버 연결, 서버 호스트, 서버 데이터베이스, 쿼리 창 등의 다양한 기능을 제공
 리눅스, 윈도우 등의 외부의 MariaDB에 접속해서 사용가능
+
 
 SELECT문의 기본구조 
 => SELECT 열이름 FROM 테이블이름 WHERE 조건
@@ -42,11 +43,35 @@ where 절
 - ex.. select * from userTbl where name = '김경호'; 
 - 조건연산자(>, <, = 등)와 관계 연산자(not, and, or등) 사용 가능
 - 연속적인 값에 between ... and 사용 가능 키나 몸무게 나이 등
-- 비연속적인 값에는 in 사용
+- 비연속적인 값에는 in 사용 or를 대체하는 기능을 함
 - 문자열의 내용 검색 like 연산자 사용 
 - ex.. where name like '김%';  -- 앞글자가 김이고 뒷 글자는 상관 없이 허용
 - '_' 연산자는 한 글자 매치
 - ex.. where name like '_용';  -- 앞글자가 한글자이고 마지막 글자가 용인
 
 
+서브쿼리
+- 쿼리문 안에 또 쿼리문이 들어 있는 것
+- ex..  select name, height from usertbl where height > 177;
+           select name, height from usertbl where height > (select height from usertbl where name = '김경호');
+	위 두 문장은 같은 기능을 하는 select 문으로 괄호 안에 있는 부분이 서브 쿼리문이다.
+- 서브 쿼리가 둘 이상의 값일 경우 서브 쿼리문 앞에 any나 all을 사용해 오류해결가능
+- any(=some)는 서브쿼리의 여러개 결과중 하나만 만족해도 되고 all은 서브쿼리의 여러 개의 결과를 모두 만족시켜야한다.
 
+
+order by
+- 결과물에 영향을 끼치지 않고 결과가 출력되는 순서를 조절해주는 구문
+- 기본 디폴트 값은 오름차순, 내림차순 열 이름 뒤 desk
+- ex.. select name, mdate from usertbl order by mdate desc;
+- where절과 같이 사용 가능
+- 단, select, from, where, group by, having, order by절 중에서 order by가 항상 마지막에 와야 한다
+
+
+distinct
+- 데이터가 중복된 것을 하나만 남기는 명령어
+- ex.. select distinct addr from usertbl;
+
+
+limit
+- 출력 개수 제한
+- 
