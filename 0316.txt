@@ -28,12 +28,12 @@ SELECT 열이름
 	order by 순서
 
 use 데이터베이스_이름 -- 데이터베이스 선택
-select * from 데이터베이스이름.테이블이름; (태이블의 원래 이름은 데이터베이스.테이블이름임 
-하지만 데이터베이스가 선택된 상황에서는 데이터베이스이름을 생략해도 무방)
+select * from 데이터베이스이름.테이블이름; 
+(테이블의 원래 이름은 데이터베이스.테이블이름임  하지만 데이터베이스가 선택된 상황에서는 데이터베이스이름을 생략해도 무방)
 *는 일반적으로 모든 것을 뜻함 
 
 
-별칭
+별칭(AS)
 열 이름을 별도의 별칭으로 지정. AS 별칭을 붙이면 됨(생략 가능) 별칭 중간의 공백 있을시 ('') 홀따옴표로 감싸야함
 ex.. select first_name as 이름, gender 성별, hire_date '회사 입사일'
 
@@ -74,4 +74,62 @@ distinct
 
 limit
 - 출력 개수 제한
-- 
+- ex.. SELECT empno, hiredate FROM emp
+		ORDER BY hiredate asc
+		LIMIT 1, 5; -- limit 시작인덱스??, 출력할 개수
+
+group by
+- 통계를 낼 때 주로 사용
+- 그룹으로 묶어주는 역할
+- 집계함수(sum, avg, max, min,...)이랑 자주 쓰임
+
+
+having
+- group by에 조건을 줄 때 필터 역할
+- having은 집계함수 에 대해 조건을 제한하는 것 (where에는 집계함수를 사용x)
+
+
+rollup
+- 총합 또는 중간 합계낼 경우 사용
+- group by 절 이후 with rollup 구문 사용
+
+
+DML - Data Manipulation Language
+- 테일블의 행.. 데이터 조작(선택, 삽입, 수정, 삭제)
+- select, insert, update, delete 구문
+- 트랜잭션(rollback, commit)
+
+DDL - Data Definition Language
+- DB , TABLE, VIEW, INDEX 등 데이터베이스 개체를 생성/삭제/변경하는 역할
+- create, drop, alter
+- 트랜잭션을 발생시키지 않음
+
+DCL - Data Control Language
+- 어떤 권한을 부여하거나 빼앗을 때 주로 사용
+- grant, revoke, deny
+
+
+INSERT
+- 테이블에 데이터를 삽입하는 명령어
+- Insert into 테이블이름(열1, 열2, 열3...) values(값1, 값2, 값3...)
+- 테이블 이름 다음에 나오는 열이름은 생략 가능 but values 다음에 나오는 값들의 순서 및 개수가
+테이블이 정의된 열 순서 및 개수와 동일해야함
+-  열이름이랑 값은 서로 대응되어야 함
+
+Auto_Increment
+- 테이블의 속성이 Auto_Increment로 이루어져 있다면 Insert에서 해당열을 null값으로 지정하면
+자동으로 1부터 증가하는 값을 입력해준다.
+- 주의할 점은 primary key 나 unique로 지정해주어야 한다
+
+UPDATE
+- 기존에 입력되어 있는 값을 변경하기 위해 사용
+- update 테이블이름
+	set 열1 = 값1, 
+	    열2 = 값2, ...
+	where 조건 
+- where절은 생략 가능 생략할시 전체 행이 변경됨
+
+DELETE
+- 행 단위로 삭제
+- delete from 테이블이름 where 조건;
+- delte from 테이블이름 where 조건 limit 갯수; 입력시 상위 갯수만큼 데이터 삭제 가능
